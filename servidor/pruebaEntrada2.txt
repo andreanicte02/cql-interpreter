@@ -1,0 +1,63 @@
+create database if not exists asdf;
+use asdf;
+
+create type est2 {
+    uno string,
+    dos int,
+    estudiante est2
+}
+
+log("hola");
+est2 estudiante = new est2;
+estudiante.uno = "tengo hambre";
+
+//est2 estudiante;
+//estudiante= {"por favor funciona ya me quiero dormir",1, new est2};
+log("--------");
+log(estudiante.uno);
+log(estudiante.dos);
+
+est2 estudiante1 = {"hola",1, new est2} as est2;
+
+date fecha = '2019-05-12';
+
+log( (string) fecha.length() );
+
+procedure ejemplo_procedure (int n, int p), (int ret1, int re3){
+  
+    log("culeros");
+    if(n ==0){
+        return 1,2;
+    }else{
+        return null,n*2;
+    }
+    
+  
+}
+
+
+call ejemplo_procedure(1,2);
+
+string prueba = "asdfasdf";
+log(prueba.startsWith("as"));
+date fechaActual = today();
+log(today());
+log(now());
+log(null);
+
+int suma(String a, int b){
+
+    log("hola suma " + a);
+    return null;
+    
+}
+int numero3 = null;
+log(numero3);
+est2 prueba2 = {"hola",1, new est2} as est2;
+
+if(prueba2 == null){
+
+    log("--------->");
+    
+}
+

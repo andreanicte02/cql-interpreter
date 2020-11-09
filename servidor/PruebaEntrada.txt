@@ -1,0 +1,114 @@
+log(5+5);
+int a,b=4;
+a=3;
+log(a);
+log(b);
+
+int fff = 0;
+while(fff<5){
+    
+    log(fff);
+    fff= fff+1;
+
+}
+
+int contador = 0;
+do{
+    log(contador);
+    contador = contador+1;
+}while(contador<0);
+
+
+if(true){
+    log("no pasa nada oiga");
+}else if(false){
+     log("no pasa nada oiga2");
+}else if(true){
+      log("si pasa algo oiga");
+}
+else{
+     log("no te quiere");
+}
+
+create type est {
+    int uno,
+    int dos,
+    int tres
+}
+
+est nombre = new est;
+
+int suma(int a, int b){
+
+    log("hola");
+    return 10;
+}
+
+int suma(int j){
+
+    return 0;
+}
+
+int suma(String a, int b){
+
+    log("hola suma" + a);
+    return 1000;
+    
+}
+
+
+for (int cuenta = 1; cuenta < 5; cuenta= cuenta +1) {
+    log(cuenta + " for");
+    
+    if(cuenta == 2){
+    
+        continue;
+    }
+    
+    log("pintar");
+}
+
+int aumento = 1;
+log(aumento++);
+log(aumento);
+log(-aumento);
+log(+aumento);
+int cuenta = 100;
+
+for (int cuenta = 1; cuenta < 5; cuenta++) {
+    log(cuenta + " for-->");
+    
+    if(cuenta == 2){
+    
+        continue;
+    }
+    
+    log("pintar");
+}
+
+create type est2 {
+    String uno,
+    est estu
+}
+
+
+
+est2 prueba = new est2;
+prueba.estu= new est;
+prueba.estu.uno = 2;
+
+log("-----------");
+prueba.uno = "holamundo";
+log(prueba.estu.uno );
+
+int fa= suma("gg", 5);
+String caden1= "hola";
+log(prueba.uno.length());
+date fecha = '2019-05-12';
+String prueba = null;
+
+if(prueba == null){
+
+    log("--------->");
+}
+

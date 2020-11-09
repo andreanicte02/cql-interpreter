@@ -1,0 +1,78 @@
+
+
+log("hola desde log");
+
+create database if not exists asdf;
+use asdf;
+
+create table dos (us counter, us2 int,us4 counter, us3 int ,nombre string);
+insert into dos values (0,0, 1, 1,"nombre");
+insert into dos values (0,0, 1, 1,"nombre");
+insert into dos values (0,0, 1, 1,"nombre");
+
+insert into dos (us2,nombre) values(2,"nombre especial");
+insert into dos (us2,nombre) values(2,"nombre especial");
+
+insert into dos(us, nombre) values (2, "nombre especial");
+
+//truncate table dos ;
+
+
+insert into dos (us,nombre) values(2,"nombre especial");
+
+
+//alter table dos drop us2, us3;
+
+
+create type est2 {
+    uno string,
+    dos int,
+    estudiante est2
+}
+
+
+alter table dos add nuevo2 int, nuevo3 string;
+insert into dos values (0,0, 1, 1,"nombre", 0,"nuevo");
+insert into dos (nuevo2,nuevo3) values(0,"nombre especial");
+
+alter table dos add estudiante est2;
+insert into dos (estudiante) values ({"val1",25,new est2} as est2);
+
+
+
+//alter table dos drop nuevo2, nuevo3;
+
+select us2, nombre from dos;
+
+log("-----------");
+
+select us2, nombre from dos where nombre != null;
+
+
+log("-----------");
+
+select * from dos;
+
+log("----------");
+update dos set nombre = "hol mundo" where nombre=="nombre especial";
+
+
+select * from dos;
+
+
+procedure ejemplo_procedure (int n, int p), (int ret1, int re3){
+  
+    log("culeros");
+    if(n ==0){
+        return 1,2;
+    }else{
+        return null,null;
+    }
+    
+}
+
+call ejemplo_procedure(1,2);
+
+//commit;
+
+log(variable);

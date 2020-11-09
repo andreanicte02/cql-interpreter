@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit.3.12.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.12.0\build\NUnit.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{72246D40-5525-40BC-8E7E-2068E2AA03CE}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>servidor</RootNamespace>
+    <AssemblyName>servidor</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32bit>false</Prefer32bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Irony, Version=1.1.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47">
+      <HintPath>..\packages\Irony.1.1.0\lib\net40\Irony.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="nunit.framework, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb">
+      <HintPath>..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Analizadores\AnalizadorChison.cs" />
+    <Compile Include="Analizadores\AnalizadorCQL.cs" />
+    <Compile Include="Analizadores\IronyExtensions.cs" />
+    <Compile Include="InterpreteChison\Instrucciones\NodoAtrr.cs" />
+    <Compile Include="InterpreteChison\Instrucciones\NodoBase.cs" />
+    <Compile Include="InterpreteChison\Instrucciones\NodoColumns.cs" />
+    <Compile Include="InterpreteChison\Instrucciones\NodoCrearBD.cs" />
+    <Compile Include="InterpreteChison\Instrucciones\NodoCrearInstruProc.cs" />
+    <Compile Include="InterpreteChison\Instrucciones\NodoCrearNombre.cs" />
+    <Compile Include="InterpreteChison\Instrucciones\NodoData.cs" />
+    <Compile Include="InterpreteChison\Instrucciones\NodoFila.cs" />
+    <Compile Include="InterpreteChison\Instrucciones\NodoGrupoData.cs" />
+    <Compile Include="InterpreteChison\Instrucciones\NodoObtenerTipo.cs" />
+    <Compile Include="InterpreteChison\Instrucciones\NodoCrearParametro.cs" />
+    <Compile Include="InterpreteChison\Instrucciones\NodoParametro.cs" />
+    <Compile Include="InterpreteChison\Utils\EjecutarAChison.cs" />
+    <Compile Include="InterpreteChison\Utils\Utilidades.cs" />
+    <Compile Include="InterpreteCQL\dbms\BaseDeDatos.cs" />
+    <Compile Include="InterpreteCQL\dbms\BdUsuarios.cs" />
+    <Compile Include="InterpreteCQL\dbms\Dbms.cs" />
+    <Compile Include="InterpreteCQL\dbms\InstruccionesDB\NodoAlter.cs" />
+    <Compile Include="InterpreteCQL\dbms\InstruccionesDB\NodoBuscarTabla.cs" />
+    <Compile Include="InterpreteCQL\dbms\InstruccionesDB\NodoCommit.cs" />
+    <Compile Include="InterpreteCQL\dbms\InstruccionesDB\NodoDeclararEncabezados.cs" />
+    <Compile Include="InterpreteCQL\dbms\InstruccionesDB\NodoInserTo.cs" />
+    <Compile Include="InterpreteCQL\dbms\InstruccionesDB\NodoSelect.cs" />
+    <Compile Include="InterpreteCQL\dbms\InstruccionesDB\NodoUpdate.cs" />
+    <Compile Include="InterpreteCQL\dbms\Tabla.cs" />
+    <Compile Include="InterpreteCQL\dbms\TeDeUListaCache.cs" />
+    <Compile Include="InterpreteCQL\dbms\User.cs" />
+    <Compile Include="InterpreteCQL\Entorno\ZContenedor.cs" />
+    <Compile Include="InterpreteCQL\Entorno\Simbolo.cs" />
+    <Compile Include="InterpreteCQL\Expresion\OperacionesAritmeticas\NodoDivision.cs" />
+    <Compile Include="InterpreteCQL\Expresion\OperacionesAritmeticas\NodoModular.cs" />
+    <Compile Include="InterpreteCQL\Expresion\OperacionesAritmeticas\NodoMultiplicacion.cs" />
+    <Compile Include="InterpreteCQL\Expresion\OperacionesAritmeticas\NodoPotencia.cs" />
+    <Compile Include="InterpreteCQL\Expresion\OperacionesAritmeticas\NodoResta.cs" />
+    <Compile Include="InterpreteCQL\Expresion\OperacionesAritmeticas\NodosOperacionAsignacion.cs" />
+    <Compile Include="InterpreteCQL\Expresion\OperacionesAritmeticas\NodoSuma.cs" />
+    <Compile Include="InterpreteCQL\Expresion\OperacionesAritmeticas\NodosUnarios.cs" />
+    <Compile Include="InterpreteCQL\Expresion\OperacionesLogicas\NodoAnd.cs" />
+    <Compile Include="InterpreteCQL\Expresion\OperacionesLogicas\NodoNot.cs" />
+    <Compile Include="InterpreteCQL\Expresion\OperacionesLogicas\NodoOr.cs" />
+    <Compile Include="InterpreteCQL\Expresion\OperacionesLogicas\NodoXor.cs" />
+    <Compile Include="InterpreteCQL\Expresion\OperacionesRelacionales\NodoIgualQue.cs" />
+    <Compile Include="InterpreteCQL\Expresion\OperacionesRelacionales\NodoMayorIgualQue.cs" />
+    <Compile Include="InterpreteCQL\Expresion\OperacionesRelacionales\NodoMayorQue.cs" />
+    <Compile Include="InterpreteCQL\Expresion\OperacionesRelacionales\NodoMenorIgualQue.cs" />
+    <Compile Include="InterpreteCQL\Expresion\OperacionesRelacionales\NodoMenorQue.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\AgenteFuncion.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\AgenteProcedimiento.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\Funcion.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\FuncionNativa.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\Procedimiento.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\Retorno.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\RetornoProc.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\ZCadena.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\ZDate.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\ZFila.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\ZInstancia.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\ZLista.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\ZNull.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\ZNumero.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\TiposPrimitivos.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\TeDeU.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\ZBool.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\ZDecimal.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\ZTiempo.cs" />
+    <Compile Include="InterpreteCQL\Expresion\Primitivos\ZTupla.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\Ciclos\ControlFlujo.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\Ciclos\NodoDoWhile.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\Ciclos\NodoFor.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\Ciclos\NodoWhile.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\CrearTiposPrimitivos\NodoCrearBool.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\CrearTiposPrimitivos\NodoCrearCadena.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\CrearTiposPrimitivos\NodoCrearDate.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\CrearTiposPrimitivos\NodoCrearDecimal.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\CrearTiposPrimitivos\NodoCrearNumero.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\CrearTiposPrimitivos\NodoCrearTime.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoAccesoPunto.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoAsignar.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoBuscarCount.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoBuscarId.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoCasteoExplicito.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoCrearInstancia.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoCrearNulo.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoCrearTupla.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoDeclararFuncion.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoDeclararParametro.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoDeclararProce.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoDeclararStruct.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoDeclararVar.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoDeclararVars.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoEliminarStruct.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoInstanciaConValores.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoInvocarFuncionPunto.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoInvocarProcedure.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoInvocarSoloFuncion.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoObtenerTeDeU.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoLogPrint.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoRetornar.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoSimple.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\NodoTernario.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\Sentencias\NodoIf.cs" />
+    <Compile Include="InterpreteCQL\Instrucciones\Sentencias\NodoSwitch.cs" />
+    <Compile Include="InterpreteCQL\Interfaces\Instruccion.cs" />
+    <Compile Include="InterpreteCQL\Utils\EjecutarAnalizadorCQL.cs" />
+    <Compile Include="InterpreteCQL\Utils\Number.cs" />
+    <Compile Include="InterpreteCQL\Utils\SemanticError.cs" />
+    <Compile Include="InterpreteCQL\Utils\Utilidades.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Prueba.cs" />
+    <Compile Include="Tests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="pruebaChison.txt" />
+    <Content Include="PruebaEntrada.txt" />
+    <Content Include="pruebaEntrada2.txt" />
+    <Content Include="pruebaEntrada3.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NUnit.3.12.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.12.0\build\NUnit.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+</Project>

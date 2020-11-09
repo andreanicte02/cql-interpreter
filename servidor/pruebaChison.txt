@@ -1,0 +1,188 @@
+$<
+    "DATABASE" = [
+        <
+            "NAME"= "Database1" ,
+            "DATA" =[
+                            <
+                                "CQL-TYPE" = "OBJECT",
+                                "NAME" = "Persona",
+                                "ATTRS" = [
+                                    < 
+                                        "NAME" = "CUI",
+                                        "TYPE" = "Double" 
+                                    >,
+                                    < 
+                                        "NAME" = "Nombre",
+                                        "TYPE" = "String" 
+                                    >
+                                ]
+                            > ,
+                            <
+                                "CQL-TYPE" = "OBJECT",
+                                "NAME" = "Automovil",
+                                "ATTRS" = [
+                                    < 
+                                        "NAME" = "Marca",
+                                        "TYPE" = "String" 
+                                    >,
+                                    < 
+                                        "NAME" = "Fecha_Compra",
+                                        "TYPE" = "Date" 
+                                    >,
+                                    < 
+                                        "NAME" = "Kilometraje",
+                                        "TYPE" = "Double" 
+                                    >,
+                                    < 
+                                        "NAME" = "Propietario",
+                                        "TYPE" = "Persona" 
+                                    >
+            
+                                ]
+                            >
+            ]
+        >,
+        
+        <
+             "NaME"= "Database21" ,
+             "DATA" =[
+                <
+             				"CQL-TYPE"="OBJECT",
+             				"NAME"="est2",
+             				"ATTRS"=[
+             					<
+             						"NAME"="uno",
+             						"TYPE"="string"
+             					>
+             					,<
+             						"NAME"="dos",
+             						"TYPE"="int"
+             					>
+             					,<
+             						"NAME"="estudiante",
+             						"TYPE"="est2"
+             					>
+             					]
+             					
+             	>,
+             	<
+                				"CQL-TYPE"="TABLE",
+                				"NAME"="dos",
+                				"COLUMNS"=[
+                				<
+                					"NAME"="us",
+                					"TYPE"="int",
+                					"PK"= TRUE
+                				>
+                				,<
+                					"NAME"="us2",
+                					"TYPE"="int",
+                					"PK"=TRUE
+                				>
+                				,<
+                					"NAME"="us4",
+                					"TYPE"="int",
+                					"PK"=TRUE
+                				>
+                				,<
+                					"NAME"="us3",
+                					"TYPE"="int",
+                					"PK"=TRUE
+                				>
+                				,<
+                					"NAME"="nombre",
+                					"TYPE"="string",
+                					"PK"=TRUE
+                				>
+                				,<
+                					"NAME"="nuevo2",
+                					"TYPE"="int",
+                					"PK"=TRUE
+                				>
+                				,<
+                					"NAME"="nuevo3",
+                					"TYPE"="string",
+                					"PK"=TRUE
+                				>
+                				,<
+                					"NAME"="estudiante",
+                					"TYPE"="est2",
+                					"PK"=TRUE
+                				>
+                				],
+                				"DATA"=[
+                				<
+                                					"us"=0
+                                					,"us2"=0
+                                					,"us4"=0
+                                					,"us3"=1
+                                					,"nombre"="nombre"
+                                					,"nuevo2"=0
+                                					,"nuevo3"=null
+                                					,"estudiante"=null
+                                >,
+                                
+                                <
+                                					"us"=9
+                                					,"us2"=0
+                                					,"us4"=9
+                                					,"us3"=0
+                                					,"nombre"=null
+                                					,"nuevo2"=0
+                                					,"nuevo3"=null
+                                					,"estudiante"=
+                                				<
+                                					"uno"="val1"
+                                					,"dos"=25
+                                					,"estudiante"=
+                                				<
+                                					"uno"=null
+                                					,"dos"=0
+                                					,"estudiante"=null
+                                				>
+                                
+                                				>
+                                
+                                >
+                				
+                				]
+                >,
+                
+                               <
+                                    "CQL-TYPE" = "PROCEDURE",
+                                    "NAME" = "Procedure1",
+                                    "PARAMETERS" = [
+                                        <
+                                            "NAME" = "@Nombre",
+                                            "TYPE" = "String",
+                                            "AS"   = IN
+                                        >,
+                                        <
+                                            "NAME" = "@Id",
+                                            "TYPE" = "Int",
+                                            "AS"   = IN
+                                        >,
+                                        <
+                                            "NAME" = "@Edad",
+                                            "TYPE" = "Int",
+                                            "AS"   = OUT
+                                        >
+                                    ],
+                                     "INSTR" = $ 
+                                                                    Int val = 5;
+                                                                    Return val;
+                                                        $
+                                    
+                                >
+             	
+          
+             	 
+             	
+             ]
+        >
+             
+          
+        
+        ]
+
+>$
