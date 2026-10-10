@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- partial: solo recorta el framework, no el interprete (usa dynamic y reflexion) -->
+    <PublishTrimmed>true</PublishTrimmed>
+    <TrimMode>partial</TrimMode>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.31" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.31" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../CqlCore/CqlCore.csproj" />
+  </ItemGroup>
+
+  <!-- ejemplos nuevos y archivos de prueba originales, embebidos en el ensamblado -->
+  <ItemGroup>
+    <EmbeddedResource Include="Ejemplos/*.cql" LogicalName="ejemplos/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../servidor/*.txt" LogicalName="pruebas/%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>

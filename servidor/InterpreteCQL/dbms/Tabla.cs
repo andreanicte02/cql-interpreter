@@ -67,7 +67,7 @@ namespace servidor.InterpreteCQL.dbms
                     tipo1.isCount = false;
                     Simbolo sim1 = new Simbolo(tipo1, new ZNumero(counter));
                     fila.setVariable(encabezados[x].Nombre,sim1);
-                    Console.WriteLine($"auto incrementable {counter}");
+                    //Console.WriteLine($"auto incrementable {counter}");
                     continue;
                 }
 
@@ -113,7 +113,7 @@ namespace servidor.InterpreteCQL.dbms
                     tipo.isCount = false;
                     sim = new Simbolo(tipo, new ZNumero(counter));
                     fila.setVariable(nodo.Nombre, sim);
-                    Console.WriteLine($"auto incrementable {counter}");
+                    //Console.WriteLine($"auto incrementable {counter}");
                     continue;
                 }
 
@@ -213,7 +213,7 @@ namespace servidor.InterpreteCQL.dbms
                     tipo.isCount = false;
                     sim = new Simbolo(tipo, new ZNumero(counter));
                     fila.setVariable(nodo.Nombre, sim);
-                    Console.WriteLine($"auto incrementable {counter}");
+                    //Console.WriteLine($"auto incrementable {counter}");
                     continue;
                 }
                 

@@ -2,7 +2,6 @@ using System;
 using Irony.Parsing;
 using servidor.Analizadores;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using servidor.InterpreteCQL.dbms;
 using servidor.InterpreteCQL.Expresion.Primitivos;
 using servidor.InterpreteCQL.Instrucciones;
@@ -13,12 +12,14 @@ namespace servidor.InterpreteCQL
 {
     public class EjecutarAnalizadorCQL
     {
+        // construir la gramatica es lo mas lento, se hace una sola vez
+        private static readonly Parser parserCql = new Parser(new AnalizadorCQL());
+
         public void ejecutarAnalizador(string entrada)
         {
             //llamada a los cosos de irony
             
-            AnalizadorCQL an = new AnalizadorCQL();
-            Parser parser = new Parser(an);
+            Parser parser = parserCql;
             ParseTree arbol = parser.Parse(entrada);
             ParseTreeNode raiz = arbol.Root;
             
@@ -32,7 +33,7 @@ namespace servidor.InterpreteCQL
 
                     foreach (var item in arbol.ParserMessages)
                     {
-                        MessageBox.Show("Error->"+item.Message+" Line:"+item.Location.Line);
+                        Console.WriteLine("Error->"+item.Message+" Line:"+(item.Location.Line + 1));
 
                     }
                     return;
