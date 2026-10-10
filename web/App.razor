@@ -1,0 +1,157 @@
+<div class="pagina">
+    <header>
+        <h1>Intérprete CQL</h1>
+        <p>
+            Intérprete de <strong>CQL</strong> (lenguaje de consultas tipo Cassandra) y de <strong>Chison</strong>
+            (el formato con el que se guarda la base de datos), hecho en C# con Irony y corriendo en el navegador con Blazor WebAssembly.
+            Elige un ejemplo, presiona <em>Ejecutar</em> y revisa la consola, las tablas y el Chison generado.
+            <a href="https://github.com/andreanicte02/cql-interpreter" target="_blank" rel="noopener">Código fuente</a>
+        </p>
+    </header>
+
+    <div class="barra">
+        <label>
+            Ejemplo
+            <select value="@indiceEjemplo" @onchange="CambiarEjemplo">
+                @foreach (var grupo in Interprete.Ejemplos.Select((e, i) => (e, i)).GroupBy(x => x.e.Grupo))
+                {
+                    <optgroup label="@grupo.Key">
+                        @foreach (var (ejemplo, i) in grupo)
+                        {
+                            <option value="@i">@ejemplo.Nombre</option>
+                        }
+                    </optgroup>
+                }
+            </select>
+        </label>
+        <label>
+            Lenguaje
+            <select @bind="lenguaje">
+                <option value="@Lenguaje.Cql">CQL</option>
+                <option value="@Lenguaje.Chison">Chison</option>
+            </select>
+        </label>
+        <button class="ejecutar" @onclick="Ejecutar" disabled="@(ejecutando || preparando)">@(preparando ? "Preparando intérprete..." : ejecutando ? "Ejecutando..." : "Ejecutar")</button>
+    </div>
+    <p class="descripcion">
+        @Interprete.Ejemplos[indiceEjemplo].Descripcion
+        @if (resultado is not null)
+        {
+            <span class="tiempo">· ejecutado en @resultado.Milisegundos ms</span>
+        }
+    </p>
+
+    <div class="trabajo">
+        <textarea class="editor" spellcheck="false" @bind="codigo" @bind:event="oninput"></textarea>
+
+        <section class="resultados">
+            <nav class="pestanias">
+                <button class="@(pestania == 0 ? "activa" : "")" @onclick="() => pestania = 0">Consola</button>
+                <button class="@(pestania == 1 ? "activa" : "")" @onclick="() => pestania = 1">Bases de datos (@(resultado?.Bases.Count ?? 0))</button>
+                <button class="@(pestania == 2 ? "activa" : "")" @onclick="() => pestania = 2" disabled="@(resultado?.Chison is null)">Chison</button>
+            </nav>
+
+            @if (pestania == 0)
+            {
+                <pre class="consola">@(resultado?.Salida ?? "Presiona Ejecutar para ver la salida.")</pre>
+            }
+            else if (pestania == 1)
+            {
+                <div class="bases">
+                    @if (resultado is null || resultado.Bases.Count == 0)
+                    {
+                        <p class="vacio">No hay bases de datos. Usa <code>create database</code> o carga un archivo Chison.</p>
+                    }
+                    else
+                    {
+                        @foreach (var bd in resultado.Bases)
+                        {
+                            <h2>@bd.Nombre</h2>
+                            @if (bd.Tipos.Count > 0)
+                            {
+                                <p><strong>Tipos:</strong> @string.Join(", ", bd.Tipos)</p>
+                            }
+                            @if (bd.Procedimientos.Count > 0)
+                            {
+                                <p><strong>Procedimientos:</strong> @string.Join(", ", bd.Procedimientos)</p>
+                            }
+                            @foreach (var tabla in bd.Tablas)
+                            {
+                                <h3>@tabla.Nombre</h3>
+                                <div class="tabla">
+                                    <table>
+                                        <thead>
+                                            <tr>@foreach (var c in tabla.Columnas) { <th>@c</th> }</tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var fila in tabla.Filas)
+                                            {
+                                                <tr>@foreach (var v in fila) { <td>@v</td> }</tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            }
+            else
+            {
+                <pre class="consola">@resultado?.Chison</pre>
+            }
+        </section>
+    </div>
+</div>
+
+@code {
+    private int indiceEjemplo;
+    private string codigo = "";
+    private Lenguaje lenguaje;
+    private Resultado? resultado;
+    private int pestania;
+    private bool ejecutando;
+
+    private bool preparando = true;
+
+    protected override void OnInitialized() => CargarEjemplo(0);
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+        {
+            return;
+        }
+        // se deja pintar la pagina antes de bloquear el hilo construyendo las gramaticas
+        await Task.Delay(50);
+        Interprete.Preparar(Lenguaje.Cql);
+        await Task.Delay(50);
+        Interprete.Preparar(Lenguaje.Chison);
+        preparando = false;
+        StateHasChanged();
+    }
+
+    private void CambiarEjemplo(ChangeEventArgs e) => CargarEjemplo(int.Parse(e.Value?.ToString() ?? "0"));
+
+    private void CargarEjemplo(int indice)
+    {
+        indiceEjemplo = indice;
+        var ejemplo = Interprete.Ejemplos[indice];
+        codigo = ejemplo.Codigo();
+        lenguaje = ejemplo.Lenguaje;
+        resultado = null;
+        pestania = 0;
+    }
+
+    private async Task Ejecutar()
+    {
+        ejecutando = true;
+        StateHasChanged();
+        // deja que el navegador pinte "Ejecutando..." antes de bloquear el hilo
+        await Task.Delay(20);
+
+        resultado = Interprete.Ejecutar(codigo, lenguaje);
+        pestania = lenguaje == Lenguaje.Chison && resultado.Bases.Count > 0 ? 1 : 0;
+        ejecutando = false;
+    }
+}

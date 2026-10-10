@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using Irony.Parsing;
 using servidor.Analizadores;
-using System.Windows.Forms;
 using servidor.InterpreteCQL;
 using servidor.InterpreteCQL.dbms;
 using servidor.InterpreteCQL.Interfaces;
@@ -12,11 +10,13 @@ namespace servidor.InterpreteChison.Utils
 {
     public class EjecutarAChison
     {
+        // construir la gramatica es lo mas lento, se hace una sola vez
+        private static readonly Parser parserChison = new Parser(new AnalizadorChison());
+
         public void ejecutarAnalizador(string entrada)
         {
             
-            AnalizadorChison analizador = new AnalizadorChison();
-            Parser parser = new Parser(analizador);
+            Parser parser = parserChison;
             ParseTree arbol = parser.Parse(entrada);
             ParseTreeNode raiz = arbol.Root;
             
@@ -29,7 +29,7 @@ namespace servidor.InterpreteChison.Utils
 
                     foreach (var item in arbol.ParserMessages)
                     {
-                        MessageBox.Show("Error->"+item.Message+" Line:"+item.Location.Line);
+                        Console.WriteLine("Error->"+item.Message+" Line:"+(item.Location.Line + 1));
 
                     }
                     return;

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
-using NUnit.Framework;
 using servidor.InterpreteCQL.dbms;
 using servidor.InterpreteCQL.Expresion;
 using servidor.InterpreteCQL.Expresion.Primitivos;

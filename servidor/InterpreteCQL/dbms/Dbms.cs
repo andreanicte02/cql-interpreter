@@ -242,6 +242,20 @@ namespace servidor.InterpreteCQL.dbms
             
         }
 
+        /// <summary>
+        /// Deja el dbms vacio, como al iniciar el programa (la version web ejecuta varias veces)
+        /// </summary>
+        public static void reiniciar()
+        {
+            bdSeleccionada = null;
+            usSeleccionado = "";
+            bases.Clear();
+            usuarios.Clear();
+            listUsersBases.Clear();
+            tedeusGlobales.Clear();
+            lus.Clear();
+        }
+
         public static bool isSelect()
         {
             return bdSeleccionada != null;

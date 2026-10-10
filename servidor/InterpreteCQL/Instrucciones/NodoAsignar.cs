@@ -1,7 +1,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using servidor.InterpreteCQL.Expresion.Primitivos;
 using servidor.InterpreteCQL.Interfaces;
 

@@ -33,7 +33,7 @@ namespace servidor.InterpreteCQL.Interfaces
             }
             catch (SemanticError exception)
             {
-                Console.WriteLine(exception.Message + " | linea: " + location.Line + " columna: " + location.Column);
+                Console.WriteLine(exception.Message + " | linea: " + (location.Line + 1) + " columna: " + location.Column);
                 throw exception;
             }
         }

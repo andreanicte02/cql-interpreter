@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Windows.Forms;
 using Irony.Parsing;
 using servidor.Analizadores;
 using servidor.InterpreteCQL;
@@ -38,7 +37,7 @@ namespace servidor.InterpreteChison
 
                     foreach (var item in arbol.ParserMessages)
                     {
-                        MessageBox.Show("Error->"+item.Message+" Line:"+item.Location.Line);
+                        System.Console.WriteLine("Error->"+item.Message+" Line:"+(item.Location.Line + 1));
 
                     }
                     return null;
